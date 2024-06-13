@@ -1,5 +1,5 @@
-export interface Customer {
-    customerId: number,
+export interface CustomerUpdateRequest {    
+    customerId: number | null,
     customerCode: string,
     customerAddres: string,
     customerName: string,

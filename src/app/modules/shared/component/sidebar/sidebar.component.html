@@ -1,0 +1,14 @@
+<div class="sidebar flex flex-col gap-3" style="height: 100vh;">
+    @for (item of menus; track $index) {
+    <a [title]="item.name" [routerLink]="[item.url]" class="menu-item" style="border-radius: 5px;">
+        <div class="flex flex-row item-center gap-2">
+            <div class="flex flex-row item-center">
+                <mat-icon aria-hidden="false" [fontIcon]="item.icon"></mat-icon>
+            </div>
+            <div>
+                {{item.name}}
+            </div>
+        </div>
+    </a>
+    }
+</div>

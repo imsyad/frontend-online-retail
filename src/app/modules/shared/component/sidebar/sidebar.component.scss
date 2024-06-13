@@ -1,0 +1,14 @@
+.sidebar {
+    padding: 1rem;
+    border-right: 1px solid #000000;
+    box-sizing: border-box;
+}
+
+.menu-item {
+    padding: .5rem 1rem .5rem 1rem;
+}
+
+.menu-item:hover {
+    background-color: #000000;
+    color: #ffffff;
+}

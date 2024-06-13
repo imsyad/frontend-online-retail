@@ -1,0 +1,17 @@
+@for (title of data.titles; track $index) {
+<h4>
+    {{title.mainTitle}}
+</h4>
+}
+
+
+<mat-dialog-content>
+    @for (content of data.contents; track $index) {
+    <h4>{{content.title}}</h4>
+    <ng-container *ngComponentOutlet="content.element; injector:content.injector"></ng-container>
+}
+</mat-dialog-content>
+
+@for (action of data.actions; track $index) {
+<button (click)="action.action()">{{action.title}}</button>
+}

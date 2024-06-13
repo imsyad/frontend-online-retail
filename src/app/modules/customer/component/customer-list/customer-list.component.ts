@@ -39,7 +39,7 @@ export class CustomerListComponent {
       })
   }
 
-  displayedColumns: String[] = ['id', 'name', 'address', 'code', 'phone', 'isActive', 'pic', 'lastOrder'];
+  displayedColumns: String[] = ['id', 'name', 'isActive', 'lastOrder'];
 
   fetchData(request: CustomerListRequest): Observable<BaseResponse<CustomerListResponse>> {
     return this.customerService.getCustomer(request);

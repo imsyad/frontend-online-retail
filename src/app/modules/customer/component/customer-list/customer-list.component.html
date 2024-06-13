@@ -9,30 +9,9 @@
         <td mat-cell *matCellDef="let element"> {{element.customerName}} </td>
     </ng-container>
 
-
-    <ng-container matColumnDef="address">
-        <th mat-header-cell *matHeaderCellDef> Address </th>
-        <td mat-cell *matCellDef="let element"> {{element.customerAddres}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="code">
-        <th mat-header-cell *matHeaderCellDef> Code </th>
-        <td mat-cell *matCellDef="let element"> {{element.customerCode}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="phone">
-        <th mat-header-cell *matHeaderCellDef> phone </th>
-        <td mat-cell *matCellDef="let element"> {{element.customerPhone}} </td>
-    </ng-container>
-
     <ng-container matColumnDef="isActive">
         <th mat-header-cell *matHeaderCellDef> Status </th>
         <td mat-cell *matCellDef="let element"> {{element.isActive ? "Active" : "Inactive"}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="pic">
-        <th mat-header-cell *matHeaderCellDef> PIC </th>
-        <td mat-cell *matCellDef="let element"> {{element.pic}} </td>
     </ng-container>
 
     <ng-container matColumnDef="lastOrder">

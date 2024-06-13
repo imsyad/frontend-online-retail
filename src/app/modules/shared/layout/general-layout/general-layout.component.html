@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="flex flex-row">
+        <div>
+            <app-sidebar></app-sidebar>
+        </div>
+        <div class="container" style="padding:1rem">
+            <!-- child -->
+            <!-- Render your child here -->
+            <h2>{{pageName}}</h2>
+            <ng-content select="[page-content]"></ng-content>
+        </div>
+    </div>
+</div>
