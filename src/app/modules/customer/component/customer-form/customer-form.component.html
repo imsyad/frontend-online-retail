@@ -1,31 +1,38 @@
-<form onsubmit="" [formGroup]="customerUpdateForm">
+<form [formGroup]="customerUpdateForm">
+    <h2>{{title}}</h2>
     <div class="flex flex-col">
+        <input hidden formControlName="customerId" />
         <mat-form-field>
-            <mat-label>Phone number</mat-label>
-            <input matInput formControlName="customerPhone" />
+            <mat-label>Customer Name</mat-label>
+            <input (blur)="onBlur('customerName')" matInput formControlName="customerName" />
+            <mat-icon matSuffix [fontIcon]="'abc'"></mat-icon>
+            <mat-error>{{formControlErrorMessages()['customerName']}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Customer Code</mat-label>
+            <input (blur)="onBlur('customerCode')" matInput formControlName="customerCode" />
+            <mat-icon matSuffix [fontIcon]="'code'"></mat-icon>
+            <mat-error>{{formControlErrorMessages()['customerCode']}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input (blur)="onBlur('customerAddress')" matInput formControlName="customerAddress" />
             <mat-icon matSuffix [fontIcon]="'phone'"></mat-icon>
-            <mat-hint>Include area code</mat-hint>
+            <mat-error>{{formControlErrorMessages()['customerAddress']}}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Phone number</mat-label>
-            <input matInput formControlName="customerPhone" />
+            <input (blur)="onBlur('customerPhone')" matInput formControlName="customerPhone" />
             <mat-icon matSuffix [fontIcon]="'phone'"></mat-icon>
-            <mat-hint>Include area code</mat-hint>
+            <mat-error>{{formControlErrorMessages()['customerPhone']}}</mat-error>
         </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Phone number</mat-label>
-            <input matInput formControlName="customerPhone" />
-            <mat-icon matSuffix [fontIcon]="'phone'"></mat-icon>
-            <mat-hint>Include area code</mat-hint>
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Phone number</mat-label>
-            <input matInput formControlName="customerPhone" />
-            <mat-icon matSuffix [fontIcon]="'phone'"></mat-icon>
-            <mat-hint>Include area code</mat-hint>
-        </mat-form-field>
+        <input hidden formControlName="pic" />
     </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="customerUpdateForm.invalid"
+        (click)="onSubmit.emit({action:customerData.action, formData:customerUpdateForm.value})">
+        Submit
+    </button>
 </form>

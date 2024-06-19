@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { GeneralLayoutComponent } from './layout/general-layout/general-layout.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { GeneralLayoutComponent } from './layout/general-layout/general-layout.c
     CommonModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
     RouterLink
   ],
   exports: [

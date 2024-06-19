@@ -1,7 +1,8 @@
-import { Component, Injector } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../../shared/component/dialog/dialog.component';
+import { Component } from '@angular/core';
 import { CustomerFormComponent } from '../component/customer-form/customer-form.component';
+import { CustomerUpdateRequest } from '../../../interface/customer/customer-update-request.interface';
+import { DialogService } from '../../shared/services/dialog/dialog.service';
+import { CustomerFormComposite } from '../../../interface/customer/customer-form-composite.interface';
 
 @Component({
   selector: 'app-customer-page',
@@ -9,41 +10,32 @@ import { CustomerFormComponent } from '../component/customer-form/customer-form.
   styleUrl: './customer-page.view.scss'
 })
 export class CustomerPageView {
-  constructor(private dialog: MatDialog) {
-    this.openCustomerDialog();
-  };
+  constructor(
+    private _dialogService: DialogService,
+  ) { };
 
+  public async showFormAdd() {
+    this.showForm({
+      action: 'add',
+      formData: {
+        customerId: null,
+        customerName: '',
+        customerAddress: '',
+        customerCode: '',
+        customerPhone: '',
+        pic: ''
+      } as CustomerUpdateRequest
+    })
+  }
 
+  public async showForm(formOption: CustomerFormComposite): Promise<void> {
+    const dialogRef = this._dialogService.showDialog<CustomerFormComposite>(
+      CustomerFormComponent,
+      formOption
+    );
 
-  openCustomerDialog(): void {
-    const injector = Injector.create({
-      providers: [{
-        provide: 'customer',
-        useValue: {
-          customerCode:'amalja0',
-          customerPhone:'081312308746'
-        }
-      }]
-    });
-
-    this.dialog.open(DialogComponent, {
-      width: '50%',
-      autoFocus: false,
-      data: {
-        titles: [{
-          mainTitle: 'Update Customer Data',
-        }],
-        contents: [{
-          title: 'Form',
-          element: CustomerFormComponent,
-          injector: injector
-        }],
-        actions: [{
-          title: 'Submit',
-          element: `<button>Submit</button>`,
-          action: () => { console.log("submit button is pressed") }
-        }]
-      }
-    });
+    const result = await dialogRef.afterClosed().toPromise();
+    console.log("This is the result of the form in the page: ", result);
+    // TODO: update handle next move after submit button emitting the result
   }
 }
