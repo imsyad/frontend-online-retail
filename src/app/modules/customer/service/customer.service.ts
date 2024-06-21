@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { BaseResponse } from '../../../interface/common/base-response.interface';
 import { CustomerListResponse } from '../../../interface/customer/customer-list-response.interface';
 import { CustomerUpdateRequest } from '../../../interface/customer/customer-update-request.interface';
+import { CustomerDeleteRequest } from '../../../interface/customer/customer-delete-request.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,14 @@ export class CustomerService {
     const url: string = action === 'add' ? `${this.BASE_URL}/customer/add` : `${this.BASE_URL}/customer/edit`;
     return this.httpClient.post(
       url,
+      request,
+      this.requestOptions
+    )
+  }
+
+  deleteCustomer(request: CustomerDeleteRequest) {
+    return this.httpClient.post(
+      `${this.BASE_URL}/customer/delete`,
       request,
       this.requestOptions
     )

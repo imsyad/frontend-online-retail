@@ -1,6 +1,6 @@
 <form [formGroup]="customerUpdateForm">
     <h2>{{title}}</h2>
-    <div class="flex flex-col">
+    <div class="flex flex-col gap-1" style="margin-bottom: 1rem;">
         <input hidden formControlName="customerId" />
         <mat-form-field>
             <mat-label>Customer Name</mat-label>
@@ -19,7 +19,7 @@
         <mat-form-field>
             <mat-label>Address</mat-label>
             <input (blur)="onBlur('customerAddress')" matInput formControlName="customerAddress" />
-            <mat-icon matSuffix [fontIcon]="'phone'"></mat-icon>
+            <mat-icon matSuffix [fontIcon]="'location_on'"></mat-icon>
             <mat-error>{{formControlErrorMessages()['customerAddress']}}</mat-error>
         </mat-form-field>
 
@@ -29,10 +29,19 @@
             <mat-icon matSuffix [fontIcon]="'phone'"></mat-icon>
             <mat-error>{{formControlErrorMessages()['customerPhone']}}</mat-error>
         </mat-form-field>
-        <input hidden formControlName="pic" />
+
+        <mat-form-field>
+            <mat-label>PIC</mat-label>
+            <input (blur)="onBlur('pic')" matInput formControlName="pic" />
+            <mat-icon matSuffix [fontIcon]="'person'"></mat-icon>
+            <mat-error>{{formControlErrorMessages()['pic']}}</mat-error>
+        </mat-form-field>
     </div>
-    <button mat-raised-button color="primary" type="submit" [disabled]="customerUpdateForm.invalid"
-        (click)="onSubmit.emit({action:customerData.action, formData:customerUpdateForm.value})">
-        Submit
-    </button>
+    <div class="flex flex-row gap-3">
+        <button mat-flat-button class="button-theme-error" (click)="onSubmit.emit()">Cancel</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="customerUpdateForm.invalid || customerUpdateForm.pristine"
+            (click)="onSubmit.emit({action:customerData.action, formData:customerUpdateForm.value})">
+            Submit
+        </button>
+    </div>
 </form>

@@ -8,13 +8,14 @@ import { DialogComponent } from '../../component/dialog/dialog.component';
 export class DialogService {
   constructor(private dialog: MatDialog) { }
 
-  public showDialog<T>(dynamicComponent: any, data?: T): any {
+  public showDialog<T>(dynamicComponent: any, data?: T, pWdith?: string) {
     return this.dialog.open(DialogComponent, {
       data: {
         component: dynamicComponent,
         data: data,
       },
-      width: '50%'
+      width: pWdith !== undefined ? pWdith : '50%',
+      autoFocus: false
     });
   }
 }

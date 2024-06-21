@@ -1,9 +1,6 @@
-import { CustomerService } from './../../service/customer.service';
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Output, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomerUpdateRequest } from '../../../../interface/customer/customer-update-request.interface';
-import { Observable } from 'rxjs';
-import { BaseResponse } from '../../../../interface/common/base-response.interface';
 import { DynamicDialogComponent } from '../../../../interface/common/dynamic-dialog-component.interface';
 import { CustomerFormComposite } from '../../../../interface/customer/customer-form-composite.interface';
 
@@ -13,13 +10,12 @@ import { CustomerFormComposite } from '../../../../interface/customer/customer-f
   styleUrl: './customer-form.component.scss'
 })
 export class CustomerFormComponent implements DynamicDialogComponent<CustomerFormComposite> {
-  constructor(private customerService: CustomerService) { };
-
-  @Input() title: string = "Default Title";
+  constructor() { };
   @Output() onSubmit = new EventEmitter<CustomerFormComposite>();
 
   public customerData!: CustomerFormComposite;
   public customerUpdateForm!: FormGroup;
+  title: string = '';
 
   private defaultCustomerRequest: CustomerUpdateRequest = {
     customerId: null,
@@ -34,6 +30,7 @@ export class CustomerFormComponent implements DynamicDialogComponent<CustomerFor
     this.customerData = data || { action: 'add', formData: this.defaultCustomerRequest };
     this.initForm();
     this.customerUpdateForm.patchValue(this.customerData);
+    this.title = data.action === 'add' ? 'Add new customer' : 'Edit customer';
   }
 
   initForm(): void {
@@ -88,24 +85,5 @@ export class CustomerFormComponent implements DynamicDialogComponent<CustomerFor
       control.markAsTouched();
       this.updateErrorMessage(controlName);
     }
-  }
-
-  handleSubmit(request: CustomerUpdateRequest, action: string): void {
-    this.postCustomerData(request, action).subscribe({
-      next: (res: BaseResponse<any>) => {
-        if (res.code === "00") {
-          console.log("Successfully update customer data!");
-        }
-      },
-      error: (err: any) => {
-        console.error("Failed to udpate customer data with error: ", err);
-        throw err;
-      }
-    })
-    this.customerUpdateForm.reset();
-  }
-
-  postCustomerData(request: CustomerUpdateRequest, action: string): Observable<BaseResponse<any>> {
-    return this.customerService.updateCustomer(request, action);
   }
 }

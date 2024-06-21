@@ -10,12 +10,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { CustomerDeleteDialogComponent } from './component/customer-delete-dialog/customer-delete-dialog.component';
 
 @NgModule({
   declarations: [
     CustomerPageView,
     CustomerListComponent,
-    CustomerFormComponent
+    CustomerFormComponent,
+    CustomerDeleteDialogComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatMenuModule,
     SharedModule
   ]
 })
