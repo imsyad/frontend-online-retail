@@ -1,1 +1,14 @@
-<app-customer-list></app-customer-list>
+<app-general-layout [pageName]="'Customer Page'">
+    <div page-content>
+        <div class="flex flex-col gap-2">
+            <div>
+                <button mat-flat-button extended (click)="showFormAdd()">
+                    <mat-icon fontIcon="add"></mat-icon>
+                    Add Customer
+                </button>
+            </div>
+            <app-customer-list [customerList]="customerListData" [displayedColumns]="customerColumns"
+                (onEdit)="showFormEdit($event)" (onDelete)="onDeleteCustomer($event)"></app-customer-list>
+        </div>
+    </div>
+</app-general-layout>
