@@ -1,0 +1,38 @@
+<script src="../../../order/services/order.service.ts"></script>
+<div class="flex flex-col gap-2">
+  <h2>Order {{ item.itemsName }}</h2>
+  <form [formGroup]="formGroup">
+    <input matInput formControlName="itemCode" hidden>
+    <div class="flex flex-col gap-2">
+      <mat-form-field>
+        <mat-label>Who Are You?</mat-label>
+        <mat-select formControlName="customerCode">
+          @for (customer of customers; track $index) {
+            <mat-option [value]="customer.customerId">{{ customer.customerName }}- {{ customer.customerCode }}
+            </mat-option>
+          }
+        </mat-select>
+        <mat-error></mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Quantity</mat-label>
+        <input matInput formControlName="quantity" type="number" min="1" [max]="item.stock"/>
+        <mat-hint align="end">Total Stock: {{ item.stock }}</mat-hint>
+        <mat-error></mat-error>
+      </mat-form-field>
+      <div class="flex flex-row gap-1 align-center" style="border-top: 1px solid white">
+        <h3>Total price: </h3>
+        <span>{{
+            Intl.NumberFormat("id-ID", {
+              style: "currency",
+              currency: "IDR"
+            }).format(formGroup.controls['quantity'].value * item.price)
+          }}</span>
+      </div>
+    </div>
+  </form>
+  <div class="flex flex-row gap-2">
+    <button mat-stroked-button (click)="onSubmit.emit()">Cancel</button>
+    <button mat-flat-button (click)="onSubmit.emit(formGroup.getRawValue())">Order</button>
+  </div>
+</div>

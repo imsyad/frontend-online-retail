@@ -1,0 +1,41 @@
+<div class="flex flex-col gap-2">
+  <h2>{{ formTitle }}</h2>
+  <form [formGroup]="itemUpdateFormGroup">
+    <div class="flex flex-col gap-1">
+      <div class="flex flex-col gap-2">
+        @for (field of itemFormFields; track $index) {
+          @if (!field.options.hidden) {
+            <mat-form-field>
+              <mat-label>{{ field.label }}</mat-label>
+              <input matInput
+                     [formControlName]="field.fieldName"
+                     [type]="field.inputType"
+                     [min]="field.inputType === 'number' ? 0 : undefined"
+                     [minLength]="field.inputType === 'text' ? 0 : undefined"
+              />
+              <mat-error>{{ controlErrorMessage()[field.fieldName] }}</mat-error>
+            </mat-form-field>
+          } @else {
+            <input hidden matInput [formControlName]="field.fieldName" [type]="field.inputType"
+                   [min]="field.inputType === 'number' ? 0 : undefined">
+          }
+        }
+      </div>
+      <div class="flex flex-col gap-1">
+        <button
+          mat-flat-button
+          [disabled]="itemUpdateFormGroup.invalid || itemUpdateFormGroup.pristine"
+          (click)="onSubmit.emit(itemUpdateFormGroup.getRawValue())"
+        >
+          Submit
+        </button>
+        <button
+          mat-stroked-button
+          (click)="onSubmit.emit()"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

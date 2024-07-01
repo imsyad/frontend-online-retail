@@ -1,0 +1,23 @@
+<div class="flex flex-col gap-2" style="padding: 1.5rem">
+  @for (item of menus; track $index) {
+    <a
+      [title]="item.label"
+      [routerLink]="[item.url]"
+      class="menu-item"
+      style="border-radius: 5px;"
+    >
+      <div
+        class="flex flex-row"
+      >
+        <div class="flex flex-row align-center gap-1">
+          <div class="flex flex-row">
+            <mat-icon class="material-icons-outlined" aria-hidden="false" [fontIcon]="item.icon"></mat-icon>
+          </div>
+          <div>
+            {{ item.label }}
+          </div>
+        </div>
+      </div>
+    </a>
+  }
+</div>

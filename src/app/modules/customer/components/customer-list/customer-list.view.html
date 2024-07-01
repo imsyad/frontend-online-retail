@@ -1,0 +1,16 @@
+<app-common-list-layout [menus]="menus">
+  <div page-content>
+    <app-table
+      tableTitle="Customer List"
+      [dataSource]="dataSource"
+      [columns]="columns"
+      [displayedColumns]="displayColumn"
+      [onEdit]="onEdit"
+      [onDelete]="onDelete"
+      (onEditClicked)="handleEditCustomer($event)"
+      (onSearch)="handleOnSearch($event)"
+      (onAddClicked)="handleAddCustomer()"
+      (onDeleteClicked)="handleDeleteCustomer($event)"
+    ></app-table>
+  </div>
+</app-common-list-layout>

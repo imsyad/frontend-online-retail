@@ -1,0 +1,8 @@
+<script src="../../../../shared/components/table/table.component.ts"></script>
+<div class="flex flex-col gap-1 align-center">
+  <h2>Are you sure want to delete this data?</h2>
+  <div class="flex flex-row gap-1" style="">
+    <button mat-stroked-button (click)="onSubmit.emit()">Cancel</button>
+    <button mat-flat-button (click)="onSubmit.emit(customerData)">Delete</button>
+  </div>
+</div>

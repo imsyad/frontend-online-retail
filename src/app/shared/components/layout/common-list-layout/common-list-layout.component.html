@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="flex flex-row">
+    <div>
+      <app-sidebar [menus]="menus"></app-sidebar>
+    </div>
+    <div class="container" style="padding:1rem">
+      <ng-content select="[page-content]"></ng-content>
+    </div>
+  </div>
+</div>

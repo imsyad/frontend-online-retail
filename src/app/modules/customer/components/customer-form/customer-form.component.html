@@ -1,0 +1,35 @@
+<div class="flex flex-col gap-2">
+  <h2>{{ formTitle }}</h2>
+  <form [formGroup]="customerUpdateFromGroup">
+    <div class="flex flex-col gap-1">
+      <div class="flex flex-col gap-2">
+        @for (field of customerFormFields; track $index) {
+          @if (!field.options.hidden) {
+            <mat-form-field>
+              <mat-label>{{ field.label }}</mat-label>
+              <input matInput [formControlName]="field.fieldName"/>
+              <mat-error>{{ controlErrorMessage()[field.fieldName] }}</mat-error>
+            </mat-form-field>
+          } @else {
+            <input hidden matInput [formControlName]="field.fieldName">
+          }
+        }
+      </div>
+      <div class="flex flex-col gap-1">
+        <button
+          mat-flat-button
+          [disabled]="customerUpdateFromGroup.invalid || customerUpdateFromGroup.pristine"
+          (click)="onSubmit.emit(customerUpdateFromGroup.getRawValue())"
+        >
+          Submit
+        </button>
+        <button
+          mat-stroked-button
+          (click)="onSubmit.emit()"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

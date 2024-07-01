@@ -1,0 +1,14 @@
+<app-common-list-layout [menus]="menus">
+  <div page-content>
+    <app-table
+      [tableTitle]="tableTitle"
+      [dataSource]="dataSource"
+      [columns]="columns"
+      [displayedColumns]="displayedColumns"
+      (onSearch)="handleOnSearch($event)"
+      [onExport]="true"
+      (onExportClicked)="handleExport()"
+    >
+    </app-table>
+  </div>
+</app-common-list-layout>

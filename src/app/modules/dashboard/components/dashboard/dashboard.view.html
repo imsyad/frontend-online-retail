@@ -1,0 +1,35 @@
+<app-common-list-layout [menus]="menus">
+  <div page-content>
+    <h2>Our Products!</h2>
+    <div class="flex flex-row gap-2  card-grid" style="flex-wrap: wrap;">
+      @for (item of itemDataSource; track $index) {
+        <!-- ( 100% width minus 16px * 5 cards ) divide by 5-->
+        <mat-card style="min-width:0; flex:0 1 calc((100% - 64px) / 5); box-sizing: border-box">
+          <mat-card-header>
+            <span class="text-white" style="font-family: Kanit, sans-serif; ">{{ item.itemsCode }}</span>
+          </mat-card-header>
+          <mat-card-content>
+            <div style="background-color:white; height:1px; width:100%; margin:.5rem 0;">
+            </div>
+            <div class="flex flex-col gap-1">
+              <span class="text-white">{{ item.itemsName }}</span>
+              <span class="text-price">{{
+                  Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR"
+                  }).format(item.price)
+                }}</span>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="flex flex-row">
+              <button mat-flat-button (click)="handleOrder(item)">
+                Buy Now
+              </button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+  </div>
+</app-common-list-layout>

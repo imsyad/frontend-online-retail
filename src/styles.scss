@@ -1,1 +1,86 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+:root {
+  --mdc-filled-button-container-shape: 0;
+  --mdc-outlined-button-container-shape: 0
+}
+
+$rem-sizes: (
+  '0': 0,
+  '1': 0.5rem,
+  '2': 1rem,
+  '3': 1.5rem,
+  '4': 2rem,
+  '5': 2.5rem,
+  '6': 3rem
+);
+$positions: start, end, center;
+$justify-positions: evenly, between, around;
+
+@mixin setAlignItems($position) {
+  align-items: $position;
+}
+
+@mixin setJustifyContent($position) {
+  justify-content: $position;
+}
+
+@mixin set-gap($gap) {
+  gap: $gap;
+}
+
+a {
+  text-decoration: none;
+  color: #333333;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+}
+
+.content {
+  padding: 1rem;
+}
+
+@each $position in $positions {
+  .align-#{$position} {
+    @include setAlignItems($position);
+  }
+
+  .justify-#{$position} {
+    @include setJustifyContent($position);
+  }
+}
+
+@each $jPosition in $justify-positions {
+  .justify-#{$jPosition} {
+    @include setJustifyContent(space-#{$jPosition});
+  }
+}
+
+@each $name, $size in $rem-sizes {
+  .gap-#{$name} {
+    @include set-gap($size);
+  }
+}
